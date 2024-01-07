@@ -4,7 +4,7 @@ import Welcome from './App.js';
 
 ReactDOM.render(
   <Welcome 
-    name='pdfjs dynamic file'
+    name='pdfjs dynamic file with FileReader'
   />,
   document.getElementById('root')
 );
