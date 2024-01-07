@@ -4,7 +4,7 @@ import Welcome from './App.js';
 
 ReactDOM.render(
   <Welcome 
-    name='ywlee'
+    name='pdfjs'
   />,
   document.getElementById('root')
 );
