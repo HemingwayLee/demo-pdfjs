@@ -10,7 +10,7 @@ const PdfLoader = props => {
 
   useEffect(() => {
     pdfjs.GlobalWorkerOptions.workerSrc = './pdf.worker.min.js'
-    var loadingTask = pdfjs.getDocument(filename);
+    var loadingTask = pdfjs.getDocument({ url: filename, disableAutoFetch: true, disableStream: true});
     loadingTask.promise.then(
       pdf => {
         pdfRef.current = pdf;
