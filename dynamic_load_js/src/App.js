@@ -1,12 +1,16 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import Button from '@mui/material/Button';
 import * as pdfjs from 'pdfjs-dist/legacy/build/pdf';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Box from '@mui/material/Box';
 
 // do not work
 // import * as fs from 'fs';
 
 export default function Main(props) {
   const [filename, setFilename] = React.useState('');
+  const [pages, setPages] = React.useState([]);
   
   function loadFile(path) {
     return new Promise((res, rej) => {
@@ -19,6 +23,10 @@ export default function Main(props) {
       });
     });
   }
+
+  const addPage = (newPage) => {
+    setPages((prevPage) => [...prevPage, newPage]);
+  };
 
   async function decodePdfPage(page) {
     const scale = 1.0;
@@ -73,7 +81,9 @@ export default function Main(props) {
     let pages = [];
     for (let i=1; i <= pdf.numPages; i++) {
       console.log(i);
-      pages.push(await decodePdfPage(await pdf.getPage(i)));
+      const thePage = await decodePdfPage(await pdf.getPage(i));
+      // pages.push(thePage);
+      addPage(thePage)
     }
 
     return pages;
@@ -87,7 +97,16 @@ export default function Main(props) {
         <input type="file" accept=".pdf" hidden />
       </Button>
       <hr />
-      
+      <List>
+        {
+          pages.map((page, i) => (
+            <ListItem key={`item-${i}`}>
+              <img src={page}>
+              </img>
+            </ListItem>
+          ))
+        }
+      </List>
     </div>
   );
 }
