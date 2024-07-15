@@ -4,6 +4,7 @@ import * as pdfjs from 'pdfjs-dist/legacy/build/pdf';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Box from '@mui/material/Box';
+import Tooltip from '@mui/material/Tooltip';
 
 // do not work
 // import * as fs from 'fs';
@@ -88,14 +89,16 @@ export default function Main(props) {
 
     return pages;
   }
-  
+
   return (
     <div>
       <h1>Hello, {props.name}</h1>
-      <Button variant="contained" component="label" onChange={handleClick}>
-        Load pdf
-        <input type="file" accept=".pdf" hidden />
-      </Button>
+      <Tooltip title="The arrow will shake while loading" placement="right" arrow>
+        <Button variant="contained" component="label" onChange={handleClick}>
+          Load pdf
+          <input type="file" accept=".pdf" hidden />
+        </Button>
+      </Tooltip>
       <hr />
       <List>
         {
